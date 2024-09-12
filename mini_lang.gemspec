@@ -10,15 +10,15 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Because not all LLM wrappers should be complicated"
   spec.description = "Simple toolbox to interact with LLMs in a simple and easy way"
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage = "https://github.com/fguillen/MiniLang"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/fguillen/MiniLang"
+  spec.metadata["changelog_uri"] = "https://github.com/fguillen/MiniLang/blob/main/CHANGELOG.md"
 
   gemspec = File.basename(__FILE__)
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
