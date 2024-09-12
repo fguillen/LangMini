@@ -8,7 +8,7 @@ class AssistanSum < MiniLang::Assistant
   end
 end
 
-class MiniLang::Tools::MathTest < ActiveSupport::TestCase
+class MiniLang::Tools::MathTest < Minitest::Test
   def setup
     MiniLang.logger.level = Logger::WARN
   end
@@ -18,7 +18,7 @@ class MiniLang::Tools::MathTest < ActiveSupport::TestCase
     OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("mini_lang/completion_tool_call_sum_1.json")))
     OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("mini_lang/completion_tool_call_sum_2.json")))
 
-    client = MiniLang::Client.new(access_token: APP_CONFIG["open_router_key"])
+    client = MiniLang::Client.new(access_token: ENV["OPEN_ROUTER_KEY"])
     assistant =
       AssistanSum.new(
         client: client,

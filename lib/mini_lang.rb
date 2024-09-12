@@ -1,4 +1,7 @@
+
 # frozen_string_literal: true
+
+require "logger"
 
 require_relative "mini_lang/version"
 require_relative "mini_lang/assistant"

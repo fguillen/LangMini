@@ -2,9 +2,9 @@
 
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "mini_lang"
-
 require "minitest/autorun"
-
+require "mocha/minitest"
+require "dotenv/load"
 
 class Minitest::Test
   FIXTURES_PATH = "#{File.dirname(__FILE__)}/fixtures".freeze

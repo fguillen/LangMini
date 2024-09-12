@@ -67,4 +67,8 @@ class MiniLang::Message
       completion: @completion.data
     }
   end
+
+  def to_s
+    JSON.pretty_generate(to_hash)
+  end
 end

@@ -1,3 +1,5 @@
+require "open_router"
+
 module MiniLang
   class Client
     def initialize(access_token:)
@@ -5,9 +7,7 @@ module MiniLang
     end
 
     def models
-      Rails.cache.fetch("mini_lang_models") do
-        @open_router_client.models.map { |e| e["id"] }.sort
-      end
+      @models ||= @open_router_client.models.map { |e| e["id"] }.sort
     end
 
     def complete(messages_hash, model:, extras: {})

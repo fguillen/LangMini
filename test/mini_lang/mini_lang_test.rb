@@ -1,8 +1,12 @@
 require "test_helper"
 
-class MiniLangTest < ActiveSupport::TestCase
+class MiniLangTest < Minitest::Test
   def setup
     MiniLang.reset
+  end
+
+  def test_that_it_has_a_version_number
+    refute_nil ::MiniLang::VERSION
   end
 
   def test_get_default_logger
