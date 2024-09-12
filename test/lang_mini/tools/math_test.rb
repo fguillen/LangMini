@@ -1,31 +1,31 @@
 require "test_helper"
 
-class AssistanSum < MiniLang::Assistant
+class AssistanSum < LangMini::Assistant
   def tools
     [
-      MiniLang::Tools::Math.new
+      LangMini::Tools::Math.new
     ]
   end
 end
 
-class MiniLang::Tools::MathTest < Minitest::Test
+class LangMini::Tools::MathTest < Minitest::Test
   def setup
-    MiniLang.logger.level = Logger::WARN
+    LangMini.logger.level = Logger::WARN
   end
 
   def test_sum_2_plus_3
     responses = sequence("responses")
-    OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("mini_lang/completion_tool_call_sum_1.json")))
-    OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("mini_lang/completion_tool_call_sum_2.json")))
+    OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("lang_mini/completion_tool_call_sum_1.json")))
+    OpenRouter::Client.any_instance.expects(:complete).in_sequence(responses).returns(JSON.parse(read_fixture("lang_mini/completion_tool_call_sum_2.json")))
 
-    client = MiniLang::Client.new(access_token: ENV["OPEN_ROUTER_KEY"])
+    client = LangMini::Client.new(access_token: ENV["OPEN_ROUTER_KEY"])
     assistant =
       AssistanSum.new(
         client: client,
         model: "openai/gpt-4o",
       )
 
-    message = MiniLang::Message.from_hash({ role: "user", content: "Use the math tool to calculate how much is 2 plus 3?" })
+    message = LangMini::Message.from_hash({ role: "user", content: "Use the math tool to calculate how much is 2 plus 3?" })
     new_messages = assistant.completion(message:)
 
     assert_equal(4, new_messages.length)

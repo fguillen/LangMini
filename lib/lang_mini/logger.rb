@@ -1,4 +1,4 @@
-# class MiniLang::Logger
+# class LangMini::Logger
 #   extend Forwardable
 
 #   def_delegators @logger, :debug, :info, :warn, :error, :fatal, :level, :level=

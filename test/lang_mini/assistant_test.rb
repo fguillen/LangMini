@@ -1,35 +1,35 @@
 require "test_helper"
 
-class MiniLang::AssistantTest < Minitest::Test
+class LangMini::AssistantTest < Minitest::Test
   def setup
-    MiniLang.logger.level = Logger::WARN
+    LangMini.logger.level = Logger::WARN
   end
 
   def test_initialize_defaults
     client = "CLIENT"
     assistant =
-      MiniLang::Assistant.new(
-        client: MiniLang::Client.new(access_token: "test"),
+      LangMini::Assistant.new(
+        client: LangMini::Client.new(access_token: "test"),
         model: "MODEL"
       )
 
     assert_equal("MODEL", assistant.model)
-    assert(assistant.conversation.is_a?(MiniLang::Conversation))
+    assert(assistant.conversation.is_a?(LangMini::Conversation))
     assert_nil(assistant.system_directive)
     assert_nil(assistant.tools)
   end
 
   def test_completion
-    OpenRouter::Client.any_instance.expects(:complete).returns(JSON.parse(read_fixture("mini_lang/completion_what_is_the_color_of_the_sky.json")))
+    OpenRouter::Client.any_instance.expects(:complete).returns(JSON.parse(read_fixture("lang_mini/completion_what_is_the_color_of_the_sky.json")))
 
-    client = MiniLang::Client.new(access_token: ENV["OPEN_ROUTER_KEY"])
+    client = LangMini::Client.new(access_token: ENV["OPEN_ROUTER_KEY"])
     assistant =
-      MiniLang::Assistant.new(
+      LangMini::Assistant.new(
         client: client,
         model: "meta-llama/llama-3.1-8b-instruct:free"
       )
 
-    message = MiniLang::Message.from_hash({ role: "user", content: "What is the color of the sky?" })
+    message = LangMini::Message.from_hash({ role: "user", content: "What is the color of the sky?" })
     new_messages = assistant.completion(message:)
 
     assert_equal(2, new_messages.length)

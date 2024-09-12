@@ -1,4 +1,4 @@
-class MiniLang::Assistant
+class LangMini::Assistant
   attr_reader :conversation
   attr_reader :model
 
@@ -11,7 +11,7 @@ class MiniLang::Assistant
     @client = client
     @system_directive = system_directive
     @model = model
-    @conversation = conversation || MiniLang::Conversation.new
+    @conversation = conversation || LangMini::Conversation.new
     @on_new_message = on_new_message
 
     after_initialize
@@ -86,8 +86,8 @@ class MiniLang::Assistant
         }
       )
 
-    completion = MiniLang::Completion.new(response)
-    message = MiniLang::Message.from_completion(completion)
+    completion = LangMini::Completion.new(response)
+    message = LangMini::Message.from_completion(completion)
     add_new_message(message)
 
     if(completion.tools?)
@@ -101,7 +101,7 @@ class MiniLang::Assistant
       m.role == "system" && m.content == system_directive.strip
     end.present?
 
-    message = MiniLang::Message.from_hash({ role: "system", content: system_directive })
+    message = LangMini::Message.from_hash({ role: "system", content: system_directive })
     add_new_message(message)
   end
 
@@ -152,7 +152,7 @@ class MiniLang::Assistant
   #   "content": "{\"temperature\": \"22\", \"unit\": \"celsius\", \"description\": \"Sunny\"}"
   # }
   def submit_tool_output(tool_call_id:, name:, output:)
-    message = MiniLang::Message.from_hash({ role: "tool", tool_call_id:, name:, content: output.to_s })
+    message = LangMini::Message.from_hash({ role: "tool", tool_call_id:, name:, content: output.to_s })
     add_new_message(message)
   end
 
@@ -164,6 +164,6 @@ class MiniLang::Assistant
   end
 
   def log(message)
-    MiniLang.logger.debug("MiniLang::Assistant: #{message}")
+    LangMini.logger.debug("LangMini::Assistant: #{message}")
   end
 end

@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in mini_lang.gemspec
+# Specify your gem's dependencies in lang_mini.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

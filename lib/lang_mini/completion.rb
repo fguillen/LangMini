@@ -21,54 +21,26 @@
 #   }
 # }
 
-class MiniLang::Message
-  attr_reader :data, :completion
+class LangMini::Completion
+  attr_reader :data
 
-  def initialize(data:, completion: nil)
-    @data = data
-    @completion = completion
-  end
-  private_class_method :new
-
-  def self.from_hash(hash)
-    new(data: hash)
+  def initialize(data)
+    @data = LangMini::Utils.symbolize_keys(data)
   end
 
-  def self.from_completion(p_completion)
-    data = MiniLang::Utils.symbolize_keys(p_completion.message)
-    completion = p_completion
-
-    new(data:, completion:)
-  end
-
-  def role
-    @data&.dig(:role)
-  end
-
-  def content
-    @data&.dig(:content)
+  def message
+    @data[:choices][0][:message]
   end
 
   def tool_calls
-    @data[:tool_calls]&.map(&:to_hash)
+    @data[:choices][0][:message][:tool_calls]
   end
 
-  def tool_call_id
-    @data&.dig(:tool_call_id)
+  def tools?
+    tool_calls.present?
   end
 
   def model
-    @completion&.model
-  end
-
-  def to_hash
-    {
-      data: @data,
-      completion: @completion.data
-    }
-  end
-
-  def to_s
-    JSON.pretty_generate(to_hash)
+    @data[:model]
   end
 end

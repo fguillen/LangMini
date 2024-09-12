@@ -1,6 +1,6 @@
 require "open_router"
 
-module MiniLang
+module LangMini
   class Client
     def initialize(access_token:)
       @open_router_client = OpenRouter::Client.new(access_token: access_token)
@@ -11,7 +11,7 @@ module MiniLang
     end
 
     def complete(messages_hash, model:, extras: {})
-      log("MiniLang::Client.complete")
+      log("LangMini::Client.complete")
       log("model: #{model}")
       log("extras:")
       log(JSON.pretty_generate(extras))
@@ -34,7 +34,7 @@ module MiniLang
     private
 
     def log(message)
-      ::MiniLang.logger.debug("MiniLang::Client: #{message}")
+      ::LangMini.logger.debug("LangMini::Client: #{message}")
     end
   end
 end

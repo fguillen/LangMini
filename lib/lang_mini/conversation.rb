@@ -1,4 +1,4 @@
-class MiniLang::Conversation
+class LangMini::Conversation
   attr_accessor :messages
   attr_reader :new_messages
 

@@ -1,5 +1,5 @@
-module MiniLang::Tools
-  class Math < MiniLang::Tool
+module LangMini::Tools
+  class Math < LangMini::Tool
     def tool_description_path
       "#{__dir__}/math.json"
     end
