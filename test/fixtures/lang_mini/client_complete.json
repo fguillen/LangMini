@@ -1,0 +1,24 @@
+{
+  "id": "gen-1728588645-bB3Kh9AMJQ0J943j4QEn",
+  "provider": "Together",
+  "model": "meta-llama/llama-3-70b-instruct",
+  "object": "chat.completion",
+  "created": 1728588645,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "eos",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Good day to you! It's an absolute pleasure to make your acquaintance. How may I be of assistance to you today? Do you have a particular inquiry, or would you like to engage in a delightful conversation?",
+        "refusal": ""
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 24,
+    "completion_tokens": 44,
+    "total_tokens": 68
+  }
+}

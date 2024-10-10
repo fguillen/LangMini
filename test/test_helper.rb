@@ -5,6 +5,7 @@ require "lang_mini"
 require "minitest/autorun"
 require "mocha/minitest"
 require "dotenv/load"
+require "webmock/minitest"
 
 class Minitest::Test
   FIXTURES_PATH = "#{File.dirname(__FILE__)}/fixtures".freeze
