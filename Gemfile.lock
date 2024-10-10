@@ -79,6 +79,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
     uri (0.13.1)
+    yard (0.9.37)
 
 PLATFORMS
   ruby
@@ -91,6 +92,7 @@ DEPENDENCIES
   mocha (~> 2.4.5)
   rake (~> 13.0)
   rubocop (~> 1.21)
+  yard
 
 BUNDLED WITH
    2.5.14

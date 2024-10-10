@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "open_router", "~> 0.3.3"
   spec.add_dependency "sequel", "~> 5.84.0"
 
+  spec.add_development_dependency "yard"
   spec.add_development_dependency "dotenv"
   spec.add_development_dependency "mocha", "~> 2.4.5"
 end
