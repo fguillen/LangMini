@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "yard"
   spec.add_development_dependency "dotenv"
   spec.add_development_dependency "mocha", "~> 2.4.5"
+  spec.add_development_dependency "webmock"
 end

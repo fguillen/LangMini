@@ -11,6 +11,13 @@ Ruby library for quick and lean access to LLMs APIs.
 
 [TODO]
 
+## Generate documentation
+
+Generate the /docs folder with:
+
+```
+yard doc
+```
 
 
 ## Contributing
