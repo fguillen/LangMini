@@ -4,7 +4,7 @@ class LangMini::ClientTest < Minitest::Test
   def setup
     LangMini.logger.level = Logger::WARN
   end
-  
+
   def test_initialize
     client = LangMini::Client.new(access_token: "TOKEN")
 
@@ -12,29 +12,37 @@ class LangMini::ClientTest < Minitest::Test
   end
 
   def test_models
-    client = LangMini::Client.new(access_token: "TOKEN")
+    # WebMock.allow_net_connect!
 
-    OpenRouter::Client.any_instance.expects(:models).returns(
-      [
-        { "id" => "model_1"},
-        { "id" => "model_2"},
-      ]
-    )
+    stub_request(:get, "https://openrouter.ai/api/v1/models").      
+      to_return(
+        status: 200, 
+        body: read_fixture("lang_mini/client_models.json"),
+        headers: {content_type: 'application/json'}
+      )
+
+    client = LangMini::Client.new(access_token: "TOKEN")
 
     models = client.models
     
-    assert_equal(2, models.count)
-    assert_equal("model_1", models[0])
-    assert_equal("model_2", models[1])
+    assert_equal(4, models.count)
+    assert_equal("google/gemini-flash-1.5-8b", models[0])
+    assert_equal("liquid/lfm-40b", models[1])
   end
 
   def test_models_should_call_open_router_only_once
     client = LangMini::Client.new(access_token: "TOKEN")
 
-    OpenRouter::Client.any_instance.expects(:models).returns([{"id" => "MODEL"}]).once
+    stub_request(:get, "https://openrouter.ai/api/v1/models").      
+      to_return(
+        status: 200, 
+        body: read_fixture("lang_mini/client_models.json"),
+        headers: {content_type: 'application/json'}
+      ).
+      times(1)
 
-    assert_equal(["MODEL"], client.models)
-    assert_equal(["MODEL"], client.models)
+    assert_equal(4, client.models.count)
+    assert_equal(4, client.models.count)
   end
 
   def test_complete
