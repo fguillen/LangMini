@@ -30,8 +30,8 @@ module LangMini
 
     # @return [Array<Hash>] The raw data, returned by the API, from the messages.
     # TODO: investigate why I see message.raw attribute here
-    def messages_data
-      @messages.map(&:data)
+    def messages_raw
+      @messages.map(&:raw)
     end
 
     # Resets the `new_messages` array

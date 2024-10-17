@@ -1,22 +1,42 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
-class LangMini::ConversationTest < Minitest::Test
-  def test_should_create_new_messages_based_on_the_conversation
-    conversation = LangMini::Conversation.new
-    ai_message = LangMini::Message.from_message({ role: "user", content: "Hello Model!" })
-    conversation.add_message(ai_message)
+module LangMini
+  class ConversationTest < Minitest::Test
+    def test_initialize_defaults
+      conversation = LangMini::Conversation.new
+      assert_equal([], conversation.messages)
+      assert_equal([], conversation.new_messages)
+    end
 
-    puts ">>>> conversation.messages: #{conversation.messages}"
-    puts ">>>> conversation.messages_data: #{conversation.messages_data}"
-  end
+    def test_add_message
+      conversation = LangMini::Conversation.new
+      conversation.add_message("MESSAGE")
 
-  def test_should_reset_new_messages
-    message = FactoryBot.create(:message)
-    ai_message = LangMini::Message.from_message(message)
+      assert_equal(["MESSAGE"], conversation.messages)
+      assert_equal(["MESSAGE"], conversation.new_messages)
+    end
 
-    conversation = LangMini::Conversation.new
-    conversation.add_message(ai_message)
+    def test_messages_raw
+      conversation = LangMini::Conversation.new
+      message_1 = LangMini::Message.from_raw("RAW_MESSAGE_1")
+      message_2 = LangMini::Message.from_raw("RAW_MESSAGE_2")
+      conversation.add_message(message_1)
+      conversation.add_message(message_2)
 
-    puts ">>>> conversation.messages_data: #{conversation.messages_data}"
+      assert_equal(%w[RAW_MESSAGE_1 RAW_MESSAGE_2], conversation.messages_raw)
+    end
+
+    def test_reset_new_messages
+      conversation = LangMini::Conversation.new
+      conversation.add_message("MESSAGE")
+      assert_equal(1, conversation.messages.count)
+      assert_equal(1, conversation.new_messages.count)
+
+      conversation.reset_new_messages
+      assert_equal(1, conversation.messages.count)
+      assert_equal(0, conversation.new_messages.count)
+    end
   end
 end

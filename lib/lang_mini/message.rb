@@ -4,14 +4,14 @@ module LangMini
   # Represents un wrapper over an API raw message or completion
   class Message
     # @return [Hash] The raw mensage from (or to) the API
-    attr_reader :data
+    attr_reader :raw
 
     # @return [LangMini::Completion] If the message is an answer from the model the data is stored here.
     attr_reader :completion
 
     # Creates a new instance of Message
     #
-    # @param data [Hash] The raw mensage from (or to) the API
+    # @param raw [Hash] The raw mensage from (or to) the API
     # @param completion [LangMini::Completion] If the message is an answer from the model. Defaults to `nil`.
     # @return [LangMini::Message]
     def initialize(raw:, completion: nil)
