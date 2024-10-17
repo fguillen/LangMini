@@ -13,10 +13,10 @@ module LangMini
   #       client: client,
   #       model: "meta-llama/llama-3.1-8b-instruct:free"
   #     )
-  #  
+  #
   #   message = LangMini::Message.from_hash({ role: "user", content: "What is the color of the sky?" })
   #   new_messages = assistant.completion(message:)
-  #  
+  #
   #   new_messages[0].data[:content] # => "What is the color of the sky?"
   #   new_messages[1].data[:content] # => "The color of the sky appears to change ..."
   class Assistant
@@ -178,7 +178,7 @@ module LangMini
         m.role == "system" && m.content == system_directive.strip
       end.present?
 
-      message = LangMini::Message.from_hash({ role: "system", content: system_directive })
+      message = LangMini::Message.from_raw({ role: "system", content: system_directive })
       add_new_message(message)
     end
 
@@ -229,7 +229,7 @@ module LangMini
     #   "content": "{\"temperature\": \"22\", \"unit\": \"celsius\", \"description\": \"Sunny\"}"
     # }
     def submit_tool_output(tool_call_id:, name:, output:)
-      message = LangMini::Message.from_hash({ role: "tool", tool_call_id:, name:, content: output.to_s })
+      message = LangMini::Message.from_raw({ role: "tool", tool_call_id:, name:, content: output.to_s })
       add_new_message(message)
     end
 

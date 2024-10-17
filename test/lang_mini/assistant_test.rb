@@ -29,7 +29,7 @@ class LangMini::AssistantTest < Minitest::Test
         model: "meta-llama/llama-3.1-8b-instruct:free"
       )
 
-    message = LangMini::Message.from_hash({ role: "user", content: "What is the color of the sky?" })
+    message = LangMini::Message.from_raw({ role: "user", content: "What is the color of the sky?" })
     new_messages = assistant.completion(message:)
 
     assert_equal(2, new_messages.length)

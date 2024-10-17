@@ -25,7 +25,7 @@ class LangMini::Tools::MathTest < Minitest::Test
         model: "openai/gpt-4o",
       )
 
-    message = LangMini::Message.from_hash({ role: "user", content: "Use the math tool to calculate how much is 2 plus 3?" })
+    message = LangMini::Message.from_raw({ role: "user", content: "Use the math tool to calculate how much is 2 plus 3?" })
     new_messages = assistant.completion(message:)
 
     assert_equal(4, new_messages.length)

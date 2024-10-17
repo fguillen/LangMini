@@ -38,11 +38,11 @@ module LangMini
     #     }
     #   ]
     #
-    #   client = LangMini::Client.new(access_token: "TOKEN") 
+    #   client = LangMini::Client.new(access_token: "TOKEN")
     #
-    #   response = 
+    #   response =
     #     client.complete(
-    #       messages_hash, 
+    #       messages_hash,
     #       model: "openrouter/auto",
     #       extras: {
     #         temperature: 0.8
@@ -58,7 +58,6 @@ module LangMini
     #   to be used.
     # @param extras [Hash] Extras information that will be sent to the model. @see https://openrouter.ai/docs/requests
     # @return [Hash<LangMini::Message>] The response from the model.
-    #   
     def complete(messages_hash, model: "openrouter/auto", extras: {})
       log("LangMini::Client.complete")
       log("model: #{model}")
