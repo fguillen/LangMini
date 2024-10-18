@@ -33,11 +33,11 @@ class LangMini::AssistantTest < Minitest::Test
     new_messages = assistant.completion(message:)
 
     assert_equal(2, new_messages.length)
-    assert_equal("user", new_messages[0].data[:role])
-    assert_equal("What is the color of the sky?", new_messages[0].data[:content])
-    assert_equal("assistant", new_messages[1].data[:role])
-    assert(new_messages[1].data[:content].start_with?("The color of the sky appears to change"))
-    assert_equal("gen-QdntFdRM8OezxqjUSLj7dWnUQYhs", new_messages[1].completion.data[:id])
-    assert_equal(307, new_messages[1].completion.data[:usage][:total_tokens])
+    assert_equal("user", new_messages[0].role)
+    assert_equal("What is the color of the sky?", new_messages[0].content)
+    assert_equal("assistant", new_messages[1].role)
+    assert(new_messages[1].content.start_with?("The color of the sky appears to change"))
+    assert_equal("gen-QdntFdRM8OezxqjUSLj7dWnUQYhs", new_messages[1].completion.raw[:id])
+    assert_equal(307, new_messages[1].completion.raw[:usage][:total_tokens])
   end
 end

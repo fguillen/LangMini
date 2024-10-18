@@ -29,14 +29,14 @@ class LangMini::Tools::MathTest < Minitest::Test
     new_messages = assistant.completion(message:)
 
     assert_equal(4, new_messages.length)
-    assert_equal("user", new_messages[0].data[:role])
-    assert_equal("assistant", new_messages[1].data[:role])
-    assert_equal("tool", new_messages[2].data[:role])
-    assert_equal("assistant", new_messages[3].data[:role])
+    assert_equal("user", new_messages[0].role)
+    assert_equal("assistant", new_messages[1].role)
+    assert_equal("tool", new_messages[2].role)
+    assert_equal("assistant", new_messages[3].role)
 
-    assert_nil(new_messages[1].data[:content])
-    assert_equal("function", new_messages[1].data[:tool_calls][0][:type])
+    assert_nil(new_messages[1].content)
+    assert_equal("function", new_messages[1].tool_calls[0][:type])
 
-    assert_equal("2 plus 3 equals 5.", new_messages[3].data[:content])
+    assert_equal("2 plus 3 equals 5.", new_messages[3].content)
   end
 end

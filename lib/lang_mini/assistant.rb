@@ -155,7 +155,7 @@ module LangMini
     def complete
       response =
         @client.complete(
-          @conversation.messages_data,
+          @conversation.messages_raw,
           model: @model,
           extras: {
             tools: extract_tools,

@@ -38,5 +38,9 @@ module LangMini
     def reset_new_messages
       @new_messages = []
     end
+
+    def as_json
+      messages_raw
+    end
   end
 end
