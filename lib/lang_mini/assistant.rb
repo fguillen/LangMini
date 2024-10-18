@@ -182,9 +182,7 @@ module LangMini
     def extract_tools
       return [] if tools.nil?
 
-      tools.map do |tool|
-        tool.tool_description
-      end.flatten
+      tools.map(&:tool_description).flatten
     end
 
     # // Some models might include their reasoning in content
@@ -204,7 +202,7 @@ module LangMini
     # },
     # From: https://github.com/patterns-ai-core/langchainrb/blob/ff699356068bd7d6bc768e5518f6b4fdcbdfc90f/lib/langchain/assistants/assistant.rb#L365C1-L379C14
     def extract_tool_call_args(tool_call)
-      tool_call_id = tool_call.dig(:id)
+      tool_call_id = tool_call[:id]
 
       function_name = tool_call.dig(:function, :name)
       tool_name, method_name = function_name.split("__")
@@ -228,9 +226,7 @@ module LangMini
 
     def add_new_message(message)
       @conversation.add_message(message)
-      if @on_new_message
-        @on_new_message.call(message)
-      end
+      @on_new_message&.call(message)
     end
 
     def log(message)
