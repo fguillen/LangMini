@@ -15,6 +15,7 @@ require_relative "lang_mini/utils"
 require_relative "lang_mini/tools/database"
 require_relative "lang_mini/tools/math"
 
+# Small library for large language models
 module LangMini
   DEFAULT_MODEL = "openai/gpt-4o"
 

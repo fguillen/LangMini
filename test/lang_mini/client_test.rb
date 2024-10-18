@@ -49,12 +49,12 @@ module LangMini
     def test_complete
       messages_hash = [
         {
-          "role": "system",
-          "content": "You are a gentel assistant."
+          role: "system",
+          content: "You are a gentel assistant."
         },
         {
-          "role": "user",
-          "content": "hello"
+          role: "user",
+          content: "hello"
         }
       ]
 

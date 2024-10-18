@@ -1,5 +1,6 @@
 AllCops:
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.1
+  NewCops: enable
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -9,3 +10,17 @@ Style/StringLiteralsInInterpolation:
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: always
+
+Metrics/MethodLength:
+  Max: 20
+  CountComments: false
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented

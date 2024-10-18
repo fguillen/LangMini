@@ -1,11 +1,15 @@
-module LangMini::Tools
-  class Math < LangMini::Tool
-    def tool_description_path
-      "#{__dir__}/math.json"
-    end
+# frozen_string_literal: true
 
-    def sum(num_1:, num_2:)
-      num_1 + num_2
+module LangMini
+  module Tools
+    class Math < LangMini::Tool
+      def tool_description_path
+        "#{__dir__}/math.json"
+      end
+
+      def sum(num_1:, num_2:)
+        num_1 + num_2
+      end
     end
   end
 end

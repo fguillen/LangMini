@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Simple toolbox to interact with LLMs in a simple and easy way"
   spec.homepage = "https://github.com/fguillen/LangMini"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.2.2"
+  spec.required_ruby_version = ">= 3.1.0"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
@@ -35,8 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "open_router", "~> 0.3.3"
   spec.add_dependency "sequel", "~> 5.84.0"
 
-  spec.add_development_dependency "yard"
-  spec.add_development_dependency "dotenv"
-  spec.add_development_dependency "mocha", "~> 2.4.5"
-  spec.add_development_dependency "webmock"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

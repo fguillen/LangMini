@@ -39,12 +39,12 @@ module LangMini
 
     # @return [String] The role of the message
     def role
-      raw.dig(:role)
+      raw[:role]
     end
 
     # @return [String] The content of the message
     def content
-      raw.dig(:content)
+      raw[:content]
     end
 
     # @return [Array<Hash>] The tool calls in the message
