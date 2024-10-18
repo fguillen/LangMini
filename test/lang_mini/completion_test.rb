@@ -19,5 +19,11 @@ module LangMini
       assert(completion.tools?)
       assert_equal("openai/gpt-4o", completion.model)
     end
+
+    def test_as_json
+      completion = LangMini::Completion.new({ "key" => "value" })
+      as_json = completion.as_json
+      assert_equal({ key: "value" }, as_json)
+    end
   end
 end

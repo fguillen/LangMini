@@ -32,9 +32,9 @@ module LangMini
     #
     # @param hash [Hash] The raw completion from the API
     # @return [LangMini::Message]
-    def self.from_completion(hash)
-      raw = LangMini::Utils.symbolize_keys(hash.message)
-      new(raw:, completion: hash)
+    def self.from_completion(completion_p)
+      raw = LangMini::Utils.symbolize_keys(completion_p.message)
+      new(raw:, completion: completion_p)
     end
 
     # @return [String] The role of the message
@@ -49,12 +49,7 @@ module LangMini
 
     # @return [Array<Hash>] The tool calls in the message
     def tool_calls
-      raw[:tool_calls]&.map(&:to_hash)
-    end
-
-    # @return [String] The tool call id
-    def tool_call_id
-      raw&.dig(:tool_call_id)
+      raw[:tool_calls]
     end
 
     # @return [String] The model of the completion
@@ -63,16 +58,11 @@ module LangMini
     end
 
     # @return [Hash] The raw data of the message, and the completion if it exists
-    def to_hash
+    def as_json
       {
         raw:,
-        completion: completion.raw
+        completion: completion&.as_json
       }
-    end
-
-    # @return [String] string representation of the message
-    def to_s
-      JSON.pretty_generate(to_hash)
     end
   end
 end

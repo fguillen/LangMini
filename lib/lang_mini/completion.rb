@@ -62,5 +62,9 @@ module LangMini
     def model
       raw[:model]
     end
+
+    def as_json
+      raw
+    end
   end
 end
