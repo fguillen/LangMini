@@ -14,7 +14,7 @@ module LangMini
     # @param access_token [String] The token to use when making requests to the
     #   Open Router API.
     def initialize(access_token:)
-      @open_router_client = OpenRouter::Client.new(access_token: access_token)
+      @open_router_client = OpenRouter::Client.new(access_token:)
     end
 
     # Get the list of models from [the Open Router API](https://openrouter.ai/models)

@@ -24,3 +24,9 @@ Metrics/MethodLength:
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+
+Style/AccessorGrouping:
+  EnforcedStyle: separated
+
+Style/GuardClause:
+  MinBodyLength: 2

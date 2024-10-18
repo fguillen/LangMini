@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module LangMini
-
   # Represents an Assistant that helps interacting with the model
   # An Assistant relates to a `model`, and the `client` that holds
   # the `complete` method.
@@ -52,8 +51,7 @@ module LangMini
 
     # Called after initializing the Assistant. This method can be overridden
     # to do extra setup.
-    def after_initialize
-    end
+    def after_initialize; end
 
     # Request a completion from the model. A completion is basically an 'answer' from the model.
     #
@@ -112,8 +110,7 @@ module LangMini
     #     end
     #   end
     #
-    def after_initialize
-    end
+    def after_initialize; end
 
     private
 
@@ -140,7 +137,7 @@ module LangMini
           end or raise ArgumentError, "Tool not found in assistant.tools '#{tool_name}'"
 
         output = tool_instance.send(method_name, **tool_arguments)
-      rescue => e
+      rescue StandardError => e
         log("Error running tool #{tool_name} with arguments #{tool_arguments}:")
         log(e.message)
         log(e.backtrace.join("\n"))
@@ -149,7 +146,7 @@ module LangMini
 
       log("run_tool: output: #{output}")
 
-      submit_tool_output(tool_call_id: tool_call_id, name: tool_call[:function][:name], output: output)
+      submit_tool_output(tool_call_id:, name: tool_call[:function][:name], output:)
     end
 
     def complete
@@ -167,7 +164,7 @@ module LangMini
       message = LangMini::Message.from_completion(completion)
       add_new_message(message)
 
-      if(completion.tools?)
+      if completion.tools?
         run_tools(completion.message[:tool_calls])
       end
     end
@@ -189,9 +186,6 @@ module LangMini
         tool.tool_description
       end.flatten
     end
-
-
-
 
     # // Some models might include their reasoning in content
     # "message": {
@@ -218,8 +212,7 @@ module LangMini
       tool_arguments = tool_call.dig(:function, :arguments)
       tool_arguments = JSON.parse(tool_arguments, symbolize_names: true)
 
-      result = [tool_call_id, tool_name, method_name, tool_arguments]
-      result
+      [tool_call_id, tool_name, method_name, tool_arguments]
     end
 
     # {
@@ -244,5 +237,4 @@ module LangMini
       LangMini.logger.debug("LangMini::Assistant: #{message}")
     end
   end
-
 end
